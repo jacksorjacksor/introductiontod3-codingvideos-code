@@ -1,71 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Visualisation with D3</title>
-		<script src="//d3js.org/d3.v6.min.js"></script>
-		<style>
-			* {
-				box-sizing: border-box;
-			}
-
-			body {
-				font-family: sans-serif;
-			}
-
-			#vis {
-				width: 600px;
-				height: 600px;
-			}
-		</style>
+		<script src="https://d3js.org/d3.v4.min.js"></script>
 	</head>
-	<body>
-		<div id="vis"></div>
+	<body style="height: 100vh">
 		<script>
-			const width = 500;
-			const height = 500;
+			// var dataArray = [];
 
-			const maxDataItems = 10;
-			const maxDataValue = 50;
-
-			var dataset = [];
-			d3.csv('data_set_1.csv', function (data) {
-				dataset = data.map(function (d) {
-					return [+d['max_i'], +d['min_i']];
-				});
-				console.log(dataset);
-			});
-
-			// function createRandomData() {
-			// 	let numDataItems = Math.floor(Math.random() * maxDataItems) + 1;
-			// 	let d = [];
-			// 	for (let i = 0; i < numDataItems; i++) {
-			// 		d.push(Math.floor(Math.random() * maxDataValue) + 1);
+			// d3.csv('/data/employee.csv', function (data) {
+			// 	for (line of data) {
+			// 		dataArray.push(parseInt(line.Age));
 			// 	}
-			// 	return d;
-			// }
+			// });
 
-			let svg = d3
-				.select('#vis')
+			// let svg = d3
+			// 	.select('body')
+			// 	.append('svg')
+			// 	.attr('height', '100%')
+			// 	.attr('width', '100%');
+
+			// svg.selectAll('rect').data(dataset).enter().append('rect');
+
+			var dataArray = [23, 13, 21, 14, 37, 15, 18, 34, 30];
+
+			var svg = d3
+				.select('body')
 				.append('svg')
-				.attr('width', width)
-				.attr('height', height);
+				.attr('height', '100%')
+				.attr('width', '100%');
 
-			console.log(dataset);
-
-			svg.selectAll('.bar')
-				.data(dataset)
-				.join((enter) => {
-					enter
-						.append('rect')
-						.attr('class', 'bar') // CLASS
-						.attr('width', '20px') // WIDTH
-						.attr('fill', 'red') // COLOUR
-						.attr('height', (d) => d * 10 + 'px') // VALUE
-						.attr('x', (d, i) => i * 20 + i + 'px') // INDEX
-						.attr('y', (d) => height - d * 10 + 'px'); // VALUE
+			svg.selectAll('rect')
+				.data(dataArray)
+				.enter()
+				.append('rect')
+				.attr('height', function (d, i) {
+					return d * 10;
+				})
+				.attr('width', '40')
+				.attr('x', function (d, i) {
+					return i * 60 + 25;
+				})
+				.attr('y', function (d, i) {
+					return 400 - d * 10;
 				});
 		</script>
 	</body>
