@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Visualisation with D3</title>
+		<script src="//d3js.org/d3.v6.min.js"></script>
+		<style>
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				font-family: sans-serif;
+			}
+
+			#vis {
+				width: 600px;
+				height: 600px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="vis"></div>
+		<script>
+			const width = 500;
+			const height = 500;
+
+			const maxDataItems = 10;
+			const maxDataValue = 50;
+
+			function createRandomData() {
+				let numDataItems = Math.floor(Math.random() * maxDataItems) + 1;
+				let d = [];
+				for (let i = 0; i < numDataItems; i++) {
+					d.push(Math.floor(Math.random() * maxDataValue) + 1);
+				}
+				return d;
+			}
+
+			let svg = d3
+				.select('#vis')
+				.append('svg')
+				.attr('width', width)
+				.attr('height', height);
+
+			let exampleData = createRandomData();
+			console.log(exampleData);
+
+			svg.selectAll('.bar')
+				.data(exampleData)
+				.join((enter) => {
+					enter
+						.append('rect')
+						.attr('class', 'bar')
+						.attr('width', '20px')
+						.attr('fill', 'red')
+						.attr('height', (d) => d * 10 + 'px')
+						.attr('x', (d, i) => i * 20 + i + 'px')
+						.attr('y', (d) => height - d * 10 + 'px');
+				});
+		</script>
+	</body>
+</html>
