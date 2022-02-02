@@ -5,23 +5,21 @@
 	</head>
 	<body style="height: 100vh">
 		<script>
-			// var dataArray = [];
+			var dataArrayFromFile = [];
 
 			// d3.csv('/data/employee.csv', function (data) {
 			// 	for (line of data) {
-			// 		dataArray.push(parseInt(line.Age));
+			// 		dataArrayFromFile.push(line.Age);
 			// 	}
 			// });
 
-			// let svg = d3
-			// 	.select('body')
-			// 	.append('svg')
-			// 	.attr('height', '100%')
-			// 	.attr('width', '100%');
+			// console.log('dataArrayFromFile:');
+			// console.log(dataArrayFromFile);
 
-			// svg.selectAll('rect').data(dataset).enter().append('rect');
+			var dataArrayFromFile = [23, 13, 21, 14, 37, 15, 18, 34, 30];
 
-			var dataArray = [23, 13, 21, 14, 37, 15, 18, 34, 30];
+			// console.log('dataArray:');
+			// console.log(dataArray);
 
 			var svg = d3
 				.select('body')
@@ -30,7 +28,7 @@
 				.attr('width', '100%');
 
 			svg.selectAll('rect')
-				.data(dataArray)
+				.data(dataArrayFromFile)
 				.enter()
 				.append('rect')
 				.attr('height', function (d, i) {
